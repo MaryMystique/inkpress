@@ -23,8 +23,19 @@ const singleReview = async (id) => {
 };
 
 const page = async ({ params }) => {
-  const perReviews = await singleReview(params.id);
-//   return <p>ID: {params.id}</p>;
+  const { id } = await params;
+
+  const perReviews = await singleReview(id);
+  if (!perReviews) {
+    return (
+      <main className="min-h-screen px-5 py-10 max-w-3xl mx-auto">
+        <div className="bg-white shadow-md rounded-md p-6">
+          <h1 className="text-2xl font-bold text-gray-800">Review not found</h1>
+        </div>
+      </main>
+    );
+  }
+
     return (
       <main>
         <main className="min-h-screen px-5 py-10 max-w-3xl mx-auto">
